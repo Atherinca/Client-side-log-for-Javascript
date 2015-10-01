@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>log window</title>
-    <script type="application/javascript" src="jslog.js"></script>
+    <script type="application/javascript" src="scripts/jslog.js"></script>
 </head>
 <body>
 <script type="application/javascript">
-    window.server= "404";
+
+    settingsErrorlog.param.url = "http://localhost:81";
     function generateError(){
         throw new SyntaxError("message");
-
     }
     generateError();
 </script>
