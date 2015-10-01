@@ -3,21 +3,12 @@
  */
 (function(window, undefined){
 
-    function SetErrorlog(){
-
         /* check the existance of an other window.onerror */
 
         if (window.onerror){
             console.log("Error window.onerror ever setting");
+            return false;
         }
-
-        /* setup params */
-        that = this;
-
-        this.param = {
-            url : "http://localhost:80",
-            loaded : true
-        };
 
         /* definition of window.onerror */
         window.onerror = function(errMessage, errURL, line, col){
@@ -42,7 +33,8 @@
                 }
 
                 /* send the request */
-                httpRequest.open('POST', that.param.url, true);
+
+                httpRequest.open('POST', onerror.param.url, true);
                 httpRequest.setRequestHeader('Content-type', 'application/x-form-urlencoded');
                 httpRequest.send(sending);
             } catch ( logginError) {
@@ -50,7 +42,10 @@
             }
             return false;
         };
-        return this;
-    }
-    window.settingsErrorlog = new SetErrorlog();
+
+        /* setup params */
+        window.onerror.param = {
+            url : "http://localhost:80",
+            loaded : true
+        };
 })(window);
