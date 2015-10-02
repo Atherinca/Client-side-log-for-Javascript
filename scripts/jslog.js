@@ -1,63 +1,78 @@
 /**
- * Created by alexandre on 28/09/15.
+ * TODO expliquer
  */
+(function (window, undefined) {
 
-(function(window, undefined){
+  /* check the existence of an other window.onerror */
+  var previousOnError = undefined;
+  if (window.onerror) {
+    console.warn("window.onerror already set");
+    previousOnError = window.onerror;
+  }
 
-        /* check the existance of an other window.onerror */
-        var oldError = undefined;
-        if (window.onerror){
-            console.log("Warn window.onerror ever setting");
-            oldError = window.onerror;
-        }
-        
+  /**
+   * TODO
+   * @param errMessage
+   * @param errURL
+   * @param line
+   * @param col
+   * @returns {*}
+   */
+  function processError(errMessage, errURL, line, col) {
+    try {
+      var httpRequest = false;
+      var sending = 'Err : ' + errMessage + ' at ' + errURL + ' in line ' + line + ':' + col;
 
-        /* definition of window.onerror */
-        window.onerror = function(errMessage, errURL, line, col){
+      /* set a new request */
+      if (window.XMLHttpRequest) { // for all browser except IE
+        httpRequest = new XMLHttpRequest();
+      } else if (window.ActiveXObject) {// IE exception
+        httpRequest = new ActiveXObject("Microsot.XMLHTTP");
+      }
 
-            if (onerror.param.loaded === false){
-                window.onerror = oldError;
-                return false;
-            }
-            try {
-                var httpRequest = false;
-                var sending = 'Err : ' + errMessage + ' at ' + errURL + ' in line ' + line +
-                    ':' + col;
+      if (!httpRequest) { //if not able to create a request
+        console.error("Error failed to create new request");
+      }
 
+      /* send the request */
+      httpRequest.open('POST', onerror.param.url, true);
+      httpRequest.setRequestHeader('Content-type', 'application/x-form-urlencoded');
+      httpRequest.send(sending);
+    } catch (logginError) {
+      console.error("Error logging failed");
+      return 1;
+    }
+    return false;
+  }
 
-                /* set a new request */
+  /**
+   * Definition of window.onerror
+   * @param errMessage
+   * @param errURL
+   * @param line
+   * @param col
+   * @returns {*}
+   */
+  window.onerror = function (errMessage, errURL, line, col, errObject) {
 
-                if (window.XMLHttpRequest){ // for all browser except IE
-                    httpRequest = new XMLHttpRequest();
-                }
-                else if (window.ActiveXObject){// IE exception
-                    httpRequest = new ActiveXObject("Microsot.XMLHTTP");
-                }
+    if (onerror.param.enabled) {
+      return processError(errMessage, errURL, line, col);
+    }
 
-                if(!httpRequest){ //if not able to create a request
-                    console.log("Error failed to create new request");
-                    return 1;
-                }
+    if (previousOnError && !__karma__) {
+      return previousOnError(errMessage, errURL, line, col, errObject);
+    }
 
-                /* send the request */
+    return false;
+  };
 
-                httpRequest.open('POST', onerror.param.url, true);
-                httpRequest.setRequestHeader('Content-type', 'application/x-form-urlencoded');
-                httpRequest.send(sending);
-                if (oldError){
-                    oldError();
-                }
-            } catch ( logginError) {
-                console.log( "Error logging failed" );
-                return 1;
-            }
-            return false;
-        };
+  window.onerror.previousOnError = previousOnError;
 
-        /* setup params */
-        window.onerror.param = {
-            url : "http://localhost:80",
-            loaded : false
-        };
+  /* setup params */
+  window.onerror.param = {
+    url: "http://localhost:80",
+    enabled: false
+  };
+
 })(window);
 

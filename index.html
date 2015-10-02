@@ -9,7 +9,7 @@
 <script type="application/javascript">
     function askingEnableLog(onerror){
         var response = confirm("Acceptez-vous l'envoi de log anonyme ?");
-        onerror.param.loaded = response === true;
+        onerror.param.enabled = response === true;
     }
     function generateError(onerror){
         onerror.param.url = "http://localhost:81";
