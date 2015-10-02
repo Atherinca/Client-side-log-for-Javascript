@@ -7,12 +7,16 @@
 </head>
 <body>
 <script type="application/javascript">
-
-    onerror.param.url = "http://localhost:81";
-    function generateError(){
+    function askingEnableLog(onerror){
+        var response = confirm("Acceptez-vous l'envoi de log anonyme ?");
+        onerror.param.loaded = response === true;
+    }
+    function generateError(onerror){
+        onerror.param.url = "http://localhost:81";
         throw new SyntaxError("message");
     }
-    generateError();
+    askingEnableLog(onerror);
+    generateError(onerror);
 </script>
 </body>
 </html>
