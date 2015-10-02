@@ -5,7 +5,7 @@
 (function(window, undefined){
 
         /* check the existance of an other window.onerror */
-        oldError = undefined;
+        var oldError = undefined;
         if (window.onerror){
             console.log("Warn window.onerror ever setting");
             oldError = window.onerror;
