@@ -1,4 +1,4 @@
-describe("Our error log API", function () {
+describe("Our error log API, when disabled", function () {
 
   it("should be installed on window.onerror and be a Function", function () {
     expect(window.onerror).toBeDefined();

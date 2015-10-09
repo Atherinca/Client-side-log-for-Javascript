@@ -1,5 +1,6 @@
 /**
- * TODO expliquer
+ * Library for the setting of a new window.onerror
+ * which send the log to the specified server
  */
 (function (window, undefined) {
 
@@ -11,7 +12,7 @@
   }
 
   /**
-   * TODO
+   * Creation of new xhr into a try catch
    * @param errMessage
    * @param errURL
    * @param line
@@ -70,7 +71,7 @@
 
   /* setup params */
   window.onerror.param = {
-    url: "http://localhost:80",
+    url: "htt://localhost:80",
     enabled: false
   };
 
