@@ -52,6 +52,7 @@
    * @param errURL
    * @param line
    * @param col
+   * @param errorObject
    * @returns {*}
    */
   window.onerror = function (errMessage, errURL, line, col, errObject) {
