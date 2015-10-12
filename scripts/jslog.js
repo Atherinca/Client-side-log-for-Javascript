@@ -55,7 +55,7 @@
    * @param errorObject
    * @returns {*}
    */
-  window.onerror = function (errMessage, errURL, line, col, errObject) {
+  window.onerror = function (errMessage, errURL, line, col, errorObject) {
 
     if (onerror.param.enabled) {
       return processError(errMessage, errURL, line, col);
@@ -72,7 +72,7 @@
 
   /* setup params */
   window.onerror.param = {
-    url: "htt://localhost:80",
+    url: "http://localhost",
     enabled: false
   };
 
