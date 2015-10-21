@@ -8,11 +8,10 @@
 <body>
 <script type="application/javascript">
     function askingEnableLog(onerror){
-        var response = confirm("Acceptez-vous l'envoi de log anonyme ?");
-        onerror.param.enabled = response === true;
+        onerror.param.enabled = true;
     }
     function generateError(onerror){
-        onerror.param.url = "http://localhost:81";
+        onerror.param.url = "http://localhost:3000/LogServer/receivelog";
         throw new SyntaxError("message");
     }
     askingEnableLog(onerror);

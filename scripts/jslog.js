@@ -22,7 +22,11 @@
   function processError(errMessage, errURL, line, col) {
     try {
       var httpRequest = false;
-      var sending = 'Err : ' + errMessage + ' at ' + errURL + ' in line ' + line + ':' + col;
+      var errorMessage = 'Err : ' + errMessage + ' at ' + errURL + ' in line ' + line + ':' + col;
+      var errorObject = {
+        errorMessage : errorMessage
+      };
+      var sending = JSON.stringify(errorObject);
 
       /* set a new request */
       if (window.XMLHttpRequest) { // for all browser except IE
@@ -37,7 +41,7 @@
 
       /* send the request */
       httpRequest.open('POST', onerror.param.url, true);
-      httpRequest.setRequestHeader('Content-type', 'application/x-form-urlencoded');
+      httpRequest.setRequestHeader('Content-type', 'application/json');
       httpRequest.send(sending);
     } catch (logginError) {
       console.error("Error logging failed");
