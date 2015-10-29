@@ -18,7 +18,7 @@ describe("Our error log API, when enabled", function () {
 
     window.XMLHttpRequest.prototype.setRequestHeader = function (header, value) {
       expect(header).toBe('Content-type');
-      expect(value).toBe('application/x-form-urlencoded');
+      expect(value).toBe('application/json');
       console.log('setRequestHeader success!');
     };
 

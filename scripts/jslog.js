@@ -22,10 +22,13 @@
   function processError(errMessage, errURL, line, col) {
     try {
       var httpRequest = false;
-      var errorMessage = 'Err : ' + errMessage + ' at ' + errURL + ' in line ' + line + ':' + col;
       var errorObject = {
-        errorMessage : errorMessage
+        errMessage : errMessage,
+        errURL : errURL,
+        line : line,
+        col : col
       };
+
       var sending = JSON.stringify(errorObject);
 
       /* set a new request */
