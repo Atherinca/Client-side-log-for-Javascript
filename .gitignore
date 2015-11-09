@@ -1,2 +1,11 @@
-node_modules/
-.idea/
+### Intellij
+.idea
+**.iml
+
+### NPM
+/bower_components
+/node_modules
+/.tmp
+/.sass-cache
+
+/dist
